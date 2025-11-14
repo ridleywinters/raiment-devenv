@@ -42,7 +42,8 @@ async function main() {
         sh.cprintln(
             `[:info:](yellow) No .code-workspace file found in [${directory}](filename)`,
         );
-        const workspaceFile = `workspace.code-workspace`;
+        const baseName = Deno.cwd().split("/").filter(Boolean).pop() || "workspace";
+        const workspaceFile = `${baseName}.code-workspace`;
         sh.write(
             workspaceFile,
             JSON.stringify({ folders: [{ path: "." }], settings: {} }, null, 4) + "\n",
